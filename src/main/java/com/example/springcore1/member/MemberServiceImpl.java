@@ -14,9 +14,6 @@ public class MemberServiceImpl implements MemberService {
         this.memberRepository = memberRepository;
     }
 
-
-
-
     // 회원가입 비지니스 로직
     @Override
     public void joinMember(Member member) {
