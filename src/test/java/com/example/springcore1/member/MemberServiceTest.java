@@ -28,6 +28,7 @@ public class MemberServiceTest {
         Long memberId = 1L;
         String memberName = "memberA";
         Grade memberGrade = Grade.VIP;
+        Member member = new Member(memberId, memberName, memberGrade);
 
         // when  :  ~ 이것을 실행했을때
         memberService.joinMember(member);
