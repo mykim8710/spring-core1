@@ -20,21 +20,41 @@ import org.springframework.context.annotation.Configuration;
 // 스프링 적용
 @Configuration  // AppConfig에 설정을 구성한다는 뜻의 annotation
 public class AppConfig {
+
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService  -> new MemoryMemberRepository()
+
+    // 예상
+    // Call AppConfig.memberService
+    // Call AppConfig.memberRepository
+    // Call AppConfig.memberRepository
+    // Call AppConfig.orderService
+    // Call AppConfig.memberRepository
+
+    // 실제
+    // Call AppConfig.memberService
+    // Call AppConfig.memberRepository
+    // Call AppConfig.orderService
+
+
     @Bean
     // 스프링 컨테이너에 스프링 빈으로 등록한다.
     // 기본적으로 메서드 이름으로 빈이 등록된다.
     public MemberService memberService() {
+        System.out.println("Call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
-    public OrderService orderService() {
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    public MemberRepository memberRepository() {
+        System.out.println("Call AppConfig.memberRepository");
+        return new MemoryMemberRepository();
     }
 
     @Bean
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+    public OrderService orderService() {
+        System.out.println("Call AppConfig.orderService");
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
