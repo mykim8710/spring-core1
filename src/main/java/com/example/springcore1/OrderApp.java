@@ -20,11 +20,17 @@ public class OrderApp {
         // MemberService memberService = appConfig.memberService();
         // OrderService orderService = appConfig.orderService();
 
-        // 스프링 적용으로 수정
+        // 스프링 적용 - @Annotation 기반의 AppConfig.class
         // ApplicationContext를 스프링 컨테이너라 한다.
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
         OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
+
+
+        // 스프링 적용 - XML기반의 appConfig.xml
+        // ApplicationContext applicationContext = new GenericXmlApplicationContext("appConfig.xml");
+        // MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        // OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
 
 
         // 회원객체 생성 및 회원가입

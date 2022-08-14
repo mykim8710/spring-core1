@@ -6,6 +6,7 @@ import com.example.springcore1.member.Member;
 import com.example.springcore1.member.MemberService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args) {
@@ -16,10 +17,16 @@ public class MemberApp {
         // AppConfig appConfig = new AppConfig();
         // MemberService memberService = appConfig.memberService();
 
-        // 스프링 적용으로 수정
+        // 스프링 적용 - @Annotation 기반의 AppConfig.class
         // ApplicationContext를 스프링 컨테이너라 한다.
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+
+
+        // 스프링 적용 - XML기반의 appConfig.xml
+        // ApplicationContext applicationContext = new GenericXmlApplicationContext("appConfig.xml");
+        // MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+
 
         // join Member Test
         Member memberA = new Member(1L, "memberA", Grade.VIP);
