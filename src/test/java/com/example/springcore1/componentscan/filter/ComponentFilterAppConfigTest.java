@@ -1,0 +1,36 @@
+package com.example.springcore1.componentscan.filter;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class ComponentFilterAppConfigTest {
+    @Test
+    void filterScanTest() {
+        // given
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ComponentFilterAppConfig.class);
+
+        // when
+        BeanA beanA = ac.getBean("beanA", BeanA.class);
+
+        // then
+        assertThat(beanA).isNotNull();
+        Assertions.assertThrows(NoSuchBeanDefinitionException.class, () ->ac.getBean("beanB", BeanB.class));
+    }
+
+    @Configuration
+    @ComponentScan(
+        includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
+    )
+    // includeFilters 에 MyIncludeComponent 애노테이션을 추가해서 BeanA가 스프링 빈에 등록된다.
+    // excludeFilters 에 MyExcludeComponent 애노테이션을 추가해서 BeanB는 스프링 빈에 등록되지 않는다.
+    static class ComponentFilterAppConfig {
+    }
+}

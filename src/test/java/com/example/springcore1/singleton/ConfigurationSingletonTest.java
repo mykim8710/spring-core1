@@ -1,6 +1,6 @@
 package com.example.springcore1.singleton;
 
-import com.example.springcore1.config.AppConfig;
+import com.example.springcore1.AppConfig;
 import com.example.springcore1.member.MemberRepository;
 import com.example.springcore1.member.MemberServiceImpl;
 import com.example.springcore1.order.OrderServiceImpl;

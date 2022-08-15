@@ -1,6 +1,6 @@
 package com.example.springcore1.singleton;
 
-import com.example.springcore1.config.AppConfig;
+import com.example.springcore1.AppConfig;
 import com.example.springcore1.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

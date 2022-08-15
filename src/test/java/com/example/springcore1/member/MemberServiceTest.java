@@ -1,6 +1,6 @@
 package com.example.springcore1.member;
 
-import com.example.springcore1.config.AppConfig;
+import com.example.springcore1.AppConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

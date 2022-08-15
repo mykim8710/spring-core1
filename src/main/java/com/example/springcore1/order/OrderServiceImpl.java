@@ -3,7 +3,10 @@ package com.example.springcore1.order;
 import com.example.springcore1.discount.DiscountPolicy;
 import com.example.springcore1.member.Member;
 import com.example.springcore1.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 // OrderServiceImpl 은 기능을 실행하는 책임만 지면 된다
 public class OrderServiceImpl implements OrderService {
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -23,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
