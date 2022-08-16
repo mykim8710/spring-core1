@@ -1,12 +1,15 @@
 package com.example.springcore1.order;
 
+import com.example.springcore1.annotation.MainDiscountPolicy;
 import com.example.springcore1.discount.DiscountPolicy;
 import com.example.springcore1.member.Member;
 import com.example.springcore1.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+//@RequiredArgsConstructor
 // OrderServiceImpl 은 기능을 실행하는 책임만 지면 된다
 public class OrderServiceImpl implements OrderService {
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -23,14 +26,30 @@ public class OrderServiceImpl implements OrderService {
 
 
     // 생성자를 통한 주입, DIP를 지킨다, 철저하게 interface에만 의존하고 있다.
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepository; //private final : 무조건 이 값이 있어야한다.
     private final DiscountPolicy discountPolicy;
 
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    // 생성자 주입을 통한 의존관계 주입
+     @Autowired // 생성자가 딱 1개만 있으면 @Autowired를 생략해도 자동 주입 된다. 물론 스프링 빈에만 해당한다.
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    // Setter 주입을 통한 의존관계 주입 : 객체가 생성된 다음에 호출
+//    private MemberRepository memberRepository;
+//    private DiscountPolicy discountPolicy;
+//
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//    }
+
 
     /**
     * 주문생성

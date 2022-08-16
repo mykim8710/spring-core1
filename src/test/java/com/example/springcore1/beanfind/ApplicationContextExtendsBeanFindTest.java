@@ -1,7 +1,7 @@
 package com.example.springcore1.beanfind;
 
 import com.example.springcore1.discount.DiscountPolicy;
-import com.example.springcore1.discount.FixedDiscountPolicy;
+import com.example.springcore1.discount.FixDiscountPolicy;
 import com.example.springcore1.discount.RateDiscountPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -76,7 +76,7 @@ public class ApplicationContextExtendsBeanFindTest {
 
         @Bean
         public DiscountPolicy fixedDiscountPolicy() {
-            return new FixedDiscountPolicy();
+            return new FixDiscountPolicy();
         }
     }
 }
